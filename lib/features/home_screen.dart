@@ -1,24 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:mad_course_may_2025/ui/app_text.dart';
+import 'package:mad_course_may_2025/ui/app_text_field.dart';
 
 /// The home screen
 class HomeScreen extends StatelessWidget {
   /// Constructs a [HomeScreen]
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController ageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Home Screen')),
-      body: Center(
-        child: ElevatedButton(
-          //? routing through Go_router package
-          onPressed: () => context.go('/details'),
-          //? Second way of routing without routing package
-          // onPressed: () => Navigator.pushNamedAndRemoveUntil(context, RoutePaths.detailScreen, (route) => false),
-          //? Default way of routing
-          // onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DetailsScreen()),),
-          child: const Text('Go to the Details screen'),
+      body: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          children: [
+            AppText(text: "Enter your details"),
+            const SizedBox(height: 15),
+            AppText(text: "Hi", fontSize: 12),
+            const SizedBox(height: 15),
+            AppText(
+                text: "Please enter ccorrect information",
+                fontWeight: FontWeight.bold),
+            const SizedBox(height: 15),
+            AppTextField(
+                controller: nameController,
+                hintText: "Enter your Name",
+                isEnable: false),
+            const SizedBox(height: 15),
+            AppTextField(
+              controller: emailController,
+              hintText: "Enter your Email",
+            ),
+            const SizedBox(height: 15),
+            AppTextField(
+              controller: ageController,
+              hintText: "Enter your Age",
+            ),
+            const SizedBox(height: 15),
+          ],
         ),
       ),
     );
