@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mad_course_may_2025/features/details_screen.dart';
-import 'package:mad_course_may_2025/features/home_screen.dart';
+import 'package:mad_course_may_2025/features/my_home_page.dart';
 import 'package:mad_course_may_2025/navigation/route_paths.dart';
 
 /// Routing throught Go_Router packages
@@ -10,7 +10,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RoutePaths.homeScreen,
       builder: (BuildContext context, GoRouterState state) {
-        return HomeScreen();
+        // return HomeScreen();
+        return const MyHomePage(
+          title: "Providers",
+        );
       },
       routes: <RouteBase>[
         GoRoute(

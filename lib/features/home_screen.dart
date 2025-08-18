@@ -21,7 +21,6 @@ class HomeScreen extends StatelessWidget {
           children: [
             AppText(text: "Enter your details"),
             const SizedBox(height: 15),
-            AppText(text: "Hi", fontSize: 12),
             const SizedBox(height: 15),
             AppText(
                 text: "Please enter ccorrect information",

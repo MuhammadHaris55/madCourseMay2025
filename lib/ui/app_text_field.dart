@@ -10,18 +10,18 @@ Widget AppTextField({
       hintText: hintText,
       // enabled: isEnable ?? true,
       enabled: isEnable,
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: Colors.red),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: Colors.purple),
-      ),
-      disabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: Colors.amberAccent),
-      ),
+      // focusedBorder: OutlineInputBorder(
+      //   borderRadius: BorderRadius.circular(16),
+      //   borderSide: BorderSide(color: Colors.red),
+      // ),
+      // enabledBorder: OutlineInputBorder(
+      //   borderRadius: BorderRadius.circular(16),
+      //   borderSide: BorderSide(color: Colors.blueAccent),
+      // ),
+      // disabledBorder: OutlineInputBorder(
+      //   borderRadius: BorderRadius.circular(16),
+      //   borderSide: BorderSide(color: Colors.amberAccent),
+      // ),
     ),
   );
 }
