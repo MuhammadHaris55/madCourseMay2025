@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mad_course_may_2025/providers/counter_provider.dart';
 import 'package:mad_course_may_2025/ui/app_text.dart';
+import 'package:mad_course_may_2025/utils/app_font.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -21,6 +23,21 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void settingSpValue(int counterValue) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('counter', counterValue);
+  }
+
+  void gettingSpValue() async {
+    print("getting function start");
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final int counter = prefs.getInt('counter') ?? 79;
+    setState(() {
+      _counter = counter;
+    });
+    print("getting end");
+  }
+
   @override
   Widget build(BuildContext context) {
     print("rendering UI");
@@ -36,14 +53,19 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            AppText(
+              text: 'You have pushed the button this many times:',
+              // fontFamily: AppFont.primaryFont,
+            ),
+            AppText(
+              text: 'You have pushed the button this many times:',
+              fontSize: 24,
             ),
             Text(
               //? through setState
-              // '$_counter',
+              '$_counter',
               //? 1 way not optimize because rebuild the whole screen every time
-              '${counterProvider.count}',
+              // '${counterProvider.count}',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             //? 2 way
@@ -66,18 +88,25 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
             ),
+
+            ElevatedButton(
+                onPressed: () => settingSpValue(_counter),
+                child: AppText(text: "Set counter in SP")),
+            ElevatedButton(
+                onPressed: gettingSpValue,
+                child: AppText(text: "Update counter from SP"))
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        // onPressed: _incrementCounter,
-        onPressed: () {
-          //? 1 way
-          // counterProvider.count++;
-          //? optimize way
-          // final counterProvider = context.read<CounterProvider>();
-          counterProvider.count++;
-        },
+        onPressed: _incrementCounter,
+        // onPressed: () {
+        //   //? 1 way
+        //   // counterProvider.count++;
+        //   //? optimize way
+        //   // final counterProvider = context.read<CounterProvider>();
+        //   counterProvider.count++;
+        // },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),

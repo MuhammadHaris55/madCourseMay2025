@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mad_course_may_2025/utils/app_font.dart';
 import 'package:mad_course_may_2025/utils/color_palette.dart';
 
 Widget AppText({
@@ -6,6 +7,7 @@ Widget AppText({
   double? fontSize,
   FontWeight? fontWeight,
   Color? color,
+  String? fontFamily,
 }) {
   return Text(
     text,
@@ -13,6 +15,7 @@ Widget AppText({
       fontSize: fontSize ?? 18,
       fontWeight: fontWeight ?? FontWeight.w500,
       color: color ?? ColorPalette.primaryColor,
+      fontFamily: fontFamily ?? AppFont.primaryFont,
     ),
   );
 }

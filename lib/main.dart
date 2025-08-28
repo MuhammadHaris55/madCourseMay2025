@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mad_course_may_2025/navigation/app_router.dart';
 import 'package:mad_course_may_2025/providers/counter_provider.dart';
+import 'package:mad_course_may_2025/utils/app_font.dart';
 import 'package:mad_course_may_2025/utils/color_palette.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         //   onGenerateRoute: (settings) => generateRoute(settings),
         //   initialRoute: RoutePaths.homeScreen,
         theme: ThemeData(
+          fontFamily: AppFont.primaryFont,
           inputDecorationTheme: InputDecorationTheme(
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
