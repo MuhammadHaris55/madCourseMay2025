@@ -14,7 +14,7 @@ Widget AppText({
     style: TextStyle(
       fontSize: fontSize ?? 18,
       fontWeight: fontWeight ?? FontWeight.w500,
-      color: color ?? ColorPalette.primaryColor,
+      color: color ?? ColorPalette.white,
       fontFamily: fontFamily ?? AppFont.primaryFont,
     ),
   );

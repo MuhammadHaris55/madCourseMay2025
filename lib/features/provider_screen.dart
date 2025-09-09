@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mad_course_may_2025/navigation/route_paths.dart';
 import 'package:mad_course_may_2025/providers/counter_provider.dart';
+import 'package:mad_course_may_2025/ui/appbar/app_bar.dart';
 import 'package:mad_course_may_2025/ui/app_text.dart';
+import 'package:mad_course_may_2025/ui/appbar/app_bar_back_button.dart';
 import 'package:mad_course_may_2025/utils/app_font.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+class ProviderScreen extends StatefulWidget {
+  const ProviderScreen({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<ProviderScreen> createState() => _ProviderScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _ProviderScreenState extends State<ProviderScreen> {
   //? through setState
   int _counter = 0;
   void _incrementCounter() {
+    //   //? through setState
     setState(() {
       _counter++;
     });
+    //   //? 1 way
+    //   // counterProvider.count++;
+    //   //? optimize way
+    //   // final counterProvider = context.read<CounterProvider>();
+    //   counterProvider.count++;
   }
 
   void settingSpValue(int counterValue) async {
@@ -29,25 +37,29 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void gettingSpValue() async {
-    print("getting function start");
+    debugPrint("in getting Shared preference function");
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final int counter = prefs.getInt('counter') ?? 79;
     setState(() {
       _counter = counter;
     });
-    print("getting end");
   }
 
   @override
   Widget build(BuildContext context) {
-    print("rendering UI");
+    debugPrint("rendering UI");
     //? 1 way not optimize because rebuild the whole screen every time
-    final counterProvider = Provider.of<CounterProvider>(context);
+    // final counterProvider = Provider.of<CounterProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+      appBar: CustomAppBar(
+        backButton: AppBarBackButton(
+            onPressed: () => context.go(RoutePaths.homeScreen)),
+        title: AppText(
+          text: "Provider Implementation",
+          fontFamily: AppFont.midfielder,
+        ),
+        closeIcon: const SizedBox.shrink(),
       ),
       body: Center(
         child: Column(
@@ -55,7 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             AppText(
               text: 'You have pushed the button this many times:',
-              // fontFamily: AppFont.primaryFont,
             ),
             AppText(
               text: 'You have pushed the button this many times:',
@@ -82,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Selector<CounterProvider, int>(
               selector: (_, provider) => provider.count,
               builder: (_, counter, __) {
-                print("Selector rebuilt");
+                debugPrint("Selector rebuilt");
                 return AppText(
                   text: "$counter",
                 );
@@ -100,13 +111,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
-        // onPressed: () {
-        //   //? 1 way
-        //   // counterProvider.count++;
-        //   //? optimize way
-        //   // final counterProvider = context.read<CounterProvider>();
-        //   counterProvider.count++;
-        // },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),

@@ -1,46 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mad_course_may_2025/navigation/route_paths.dart';
+import 'package:mad_course_may_2025/ui/appbar/app_bar.dart';
 import 'package:mad_course_may_2025/ui/app_text.dart';
-import 'package:mad_course_may_2025/ui/app_text_field.dart';
+import 'package:mad_course_may_2025/ui/buttons/app_primary_button.dart';
+import 'package:mad_course_may_2025/utils/app_font.dart';
+import 'package:mad_course_may_2025/utils/color_palette.dart';
 
-/// The home screen
 class HomeScreen extends StatelessWidget {
-  /// Constructs a [HomeScreen]
-  HomeScreen({super.key});
-
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController ageController = TextEditingController();
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home Screen')),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
+      appBar: CustomAppBar(
+        backButton: const SizedBox.shrink(),
+        // backButton: AppBarBackButton(onPressed: () {}),
+        title: AppText(
+          text: "Home Screen",
+          fontFamily: AppFont.midfielder,
+        ),
+        closeIcon: const SizedBox.shrink(),
+        // closeIcon: AppBarCloseIcon(onPressed: () {}),
+      ),
+      body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AppText(text: "Enter your details"),
-            const SizedBox(height: 15),
-            const SizedBox(height: 15),
-            AppText(
-                text: "Please enter ccorrect information",
-                fontWeight: FontWeight.bold),
-            const SizedBox(height: 15),
-            AppTextField(
-                controller: nameController,
-                hintText: "Enter your Name",
-                isEnable: false),
-            const SizedBox(height: 15),
-            AppTextField(
-              controller: emailController,
-              hintText: "Enter your Email",
+            AppButton(
+              onPressed: () => context.go(RoutePaths.themingScreen),
+              text: "Theming Class",
+              buttonColor: ColorPalette.cpFF8383,
             ),
-            const SizedBox(height: 15),
-            AppTextField(
-              controller: ageController,
-              hintText: "Enter your Age",
+            const SizedBox(height: 20),
+            AppButton(
+              onPressed: () => context.go(RoutePaths.providerScreen),
+              text: "Provider Class",
+              buttonColor: ColorPalette.cpFF8383,
             ),
-            const SizedBox(height: 15),
+            const SizedBox(height: 20),
+            AppButton(
+              onPressed: () => context.go(RoutePaths.firestoreCrudScreen),
+              text: "Firestore Class",
+              buttonColor: ColorPalette.cpFF8383,
+            ),
           ],
         ),
       ),
